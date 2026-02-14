@@ -1,81 +1,103 @@
-import { Bird, Menu, X, Heart, User } from "lucide-react";
+import { Bird, Menu, X, MessageCircle, User, LogOut, Shield, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { user, profile, isAdmin, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
-      <div className="container flex items-center justify-between h-16 md:h-20">
-        {/* Logo */}
-        <a href="/" className="flex items-center gap-2 group">
-          <div className="p-2 rounded-xl bg-gradient-hero shadow-glow group-hover:scale-105 transition-transform">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
+      <div className="container flex items-center justify-between h-16">
+        <Link to="/" className="flex items-center gap-2">
+          <div className="p-1.5 rounded-lg bg-gradient-hero">
             <Bird className="w-5 h-5 text-primary-foreground" />
           </div>
-          <span className="font-display text-xl font-bold text-foreground">
-            Feather<span className="text-primary">Exchange</span>
+          <span className="font-display text-lg font-bold text-foreground">
+            Bird<span className="text-primary">Market</span>
           </span>
-        </a>
+        </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-8">
-          <a href="#" className="font-body text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Browse Birds
-          </a>
-          <a href="#" className="font-body text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Categories
-          </a>
-          <a href="#" className="font-body text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Breeders
-          </a>
-          <a href="#" className="font-body text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-            Resources
-          </a>
+        <div className="hidden md:flex items-center gap-6">
+          <Link to="/browse" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Browse</Link>
+          {user && (
+            <>
+              <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">My Listings</Link>
+              <Link to="/messages" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Messages</Link>
+            </>
+          )}
+          {isAdmin && (
+            <Link to="/admin" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+              <Shield className="w-3.5 h-3.5" /> Admin
+            </Link>
+          )}
         </div>
 
-        {/* Desktop Actions */}
-        <div className="hidden md:flex items-center gap-3">
-          <Button variant="ghost" size="icon">
-            <Heart className="w-5 h-5" />
-          </Button>
-          <Button variant="ghost" size="icon">
-            <User className="w-5 h-5" />
-          </Button>
-          <Button variant="warm">
-            List Your Bird
-          </Button>
+        <div className="hidden md:flex items-center gap-2">
+          {user ? (
+            <>
+              <Button variant="default" size="sm" asChild>
+                <Link to="/create-listing"><Plus className="w-4 h-4 mr-1" /> Sell</Link>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <Link to="/messages"><MessageCircle className="w-5 h-5" /></Link>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
+                <Link to="/profile"><User className="w-5 h-5" /></Link>
+              </Button>
+              <Button variant="ghost" size="icon" onClick={handleSignOut}>
+                <LogOut className="w-5 h-5" />
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/auth">Sign In</Link>
+              </Button>
+              <Button size="sm" asChild>
+                <Link to="/auth">Get Started</Link>
+              </Button>
+            </>
+          )}
         </div>
 
-        {/* Mobile Menu Toggle */}
-        <button 
-          className="md:hidden p-2"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-border animate-fade-up">
-          <div className="container py-4 flex flex-col gap-4">
-            <a href="#" className="font-body text-sm font-medium text-foreground py-2">
-              Browse Birds
-            </a>
-            <a href="#" className="font-body text-sm font-medium text-foreground py-2">
-              Categories
-            </a>
-            <a href="#" className="font-body text-sm font-medium text-foreground py-2">
-              Breeders
-            </a>
-            <a href="#" className="font-body text-sm font-medium text-foreground py-2">
-              Resources
-            </a>
-            <div className="flex gap-3 pt-2">
-              <Button variant="outline" className="flex-1">Sign In</Button>
-              <Button variant="warm" className="flex-1">List Your Bird</Button>
-            </div>
+        <div className="md:hidden border-t border-border bg-background animate-fade-up">
+          <div className="container py-4 flex flex-col gap-3">
+            <Link to="/browse" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Browse</Link>
+            {user && (
+              <>
+                <Link to="/dashboard" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>My Listings</Link>
+                <Link to="/messages" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Messages</Link>
+                <Link to="/profile" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Profile</Link>
+                <Link to="/create-listing" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Sell a Bird</Link>
+                {isAdmin && <Link to="/admin" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Admin</Link>}
+                <button onClick={handleSignOut} className="text-sm font-medium py-2 text-left text-destructive">Sign Out</button>
+              </>
+            )}
+            {!user && (
+              <div className="flex gap-2 pt-2">
+                <Button variant="outline" className="flex-1" asChild>
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
+                </Button>
+                <Button className="flex-1" asChild>
+                  <Link to="/auth" onClick={() => setIsMenuOpen(false)}>Get Started</Link>
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}

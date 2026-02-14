@@ -1,109 +1,71 @@
-import BirdCard from "./BirdCard";
-import birdMacaw from "@/assets/bird-macaw.jpg";
-import birdCockatiel from "@/assets/bird-cockatiel.jpg";
-import birdBudgie from "@/assets/bird-budgie.jpg";
-import birdAfricanGrey from "@/assets/bird-african-grey.jpg";
-import birdCanary from "@/assets/bird-canary.jpg";
-import birdConure from "@/assets/bird-conure.jpg";
-
-const featuredBirds = [
-  {
-    id: 1,
-    name: "Azure the Macaw",
-    species: "Blue & Gold Macaw",
-    price: 2500,
-    location: "Miami, FL",
-    image: birdMacaw,
-    rating: 4.9,
-    reviews: 23,
-    age: "2 years",
-    seller: "TropicalBirds"
-  },
-  {
-    id: 2,
-    name: "Sunny",
-    species: "Cockatiel",
-    price: 150,
-    location: "Austin, TX",
-    image: birdCockatiel,
-    rating: 5.0,
-    reviews: 45,
-    age: "8 months",
-    seller: "BirdLover22"
-  },
-  {
-    id: 3,
-    name: "Kiwi",
-    species: "Green Budgie",
-    price: 45,
-    location: "Denver, CO",
-    image: birdBudgie,
-    rating: 4.8,
-    reviews: 67,
-    age: "6 months",
-    seller: "FeatherFarm"
-  },
-  {
-    id: 4,
-    name: "Einstein",
-    species: "African Grey Parrot",
-    price: 3200,
-    location: "Seattle, WA",
-    image: birdAfricanGrey,
-    rating: 4.9,
-    reviews: 12,
-    age: "3 years",
-    seller: "ExoticAviary"
-  },
-  {
-    id: 5,
-    name: "Tweety",
-    species: "Yellow Canary",
-    price: 75,
-    location: "Phoenix, AZ",
-    image: birdCanary,
-    rating: 4.7,
-    reviews: 89,
-    age: "1 year",
-    seller: "SongbirdHaven"
-  },
-  {
-    id: 6,
-    name: "Mango",
-    species: "Sun Conure",
-    price: 650,
-    location: "Orlando, FL",
-    image: birdConure,
-    rating: 5.0,
-    reviews: 34,
-    age: "10 months",
-    seller: "ColorfulWings"
-  }
-];
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
+import { MapPin } from "lucide-react";
 
 const FeaturedBirds = () => {
+  const [listings, setListings] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetch = async () => {
+      const { data } = await supabase
+        .from("listings")
+        .select("*, listing_photos(*)")
+        .eq("status", "active")
+        .order("created_at", { ascending: false })
+        .limit(6);
+      setListings(data || []);
+    };
+    fetch();
+  }, []);
+
+  if (listings.length === 0) return null;
+
   return (
-    <section className="py-20 bg-gradient-sky">
+    <section className="py-16 bg-gradient-sky">
       <div className="container">
-        <div className="text-center mb-12">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Featured Birds
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Discover our most popular listings from trusted sellers and breeders across the country.
-          </p>
+        <div className="text-center mb-10">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-3">Latest Listings</h2>
+          <p className="text-muted-foreground">Fresh birds just posted by sellers.</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {featuredBirds.map((bird) => (
-            <BirdCard key={bird.id} {...bird} />
-          ))}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {listings.map((listing) => {
+            const photo = listing.listing_photos?.[0]?.url;
+            return (
+              <Link
+                key={listing.id}
+                to={`/listing/${listing.id}`}
+                className="group bg-card rounded-xl overflow-hidden border border-border shadow-soft hover:shadow-medium transition-all hover:-translate-y-0.5"
+              >
+                <div className="aspect-square bg-muted overflow-hidden">
+                  {photo ? (
+                    <img src={photo} alt={listing.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">No Photo</div>
+                  )}
+                </div>
+                <div className="p-4">
+                  <h3 className="font-display font-semibold text-foreground line-clamp-1">{listing.title}</h3>
+                  <p className="text-sm text-muted-foreground capitalize">{listing.species || listing.category}</p>
+                  <div className="flex items-center justify-between mt-2">
+                    <p className="font-display text-lg font-bold text-primary">${listing.price}</p>
+                    {listing.city && (
+                      <span className="text-xs text-muted-foreground flex items-center gap-0.5">
+                        <MapPin className="w-3 h-3" /> {listing.city}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </Link>
+            );
+          })}
         </div>
 
-        <div className="text-center mt-12">
-          <button className="font-body text-primary font-medium hover:underline underline-offset-4 transition-all">
+        <div className="text-center mt-10">
+          <Link to="/browse" className="text-primary font-medium hover:underline underline-offset-4 text-sm">
             View All Listings →
-          </button>
+          </Link>
         </div>
       </div>
     </section>

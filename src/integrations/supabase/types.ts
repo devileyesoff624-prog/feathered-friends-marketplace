@@ -14,16 +14,234 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      listing_photos: {
+        Row: {
+          created_at: string
+          id: string
+          listing_id: string
+          url: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          listing_id: string
+          url: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          listing_id?: string
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "listing_photos_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      listings: {
+        Row: {
+          age: string | null
+          category: Database["public"]["Enums"]["listing_category"]
+          city: string | null
+          created_at: string
+          description: string | null
+          health_info: string | null
+          id: string
+          price: number
+          species: string | null
+          status: Database["public"]["Enums"]["listing_status"]
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          age?: string | null
+          category?: Database["public"]["Enums"]["listing_category"]
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          health_info?: string | null
+          id?: string
+          price?: number
+          species?: string | null
+          status?: Database["public"]["Enums"]["listing_status"]
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          age?: string | null
+          category?: Database["public"]["Enums"]["listing_category"]
+          city?: string | null
+          created_at?: string
+          description?: string | null
+          health_info?: string | null
+          id?: string
+          price?: number
+          species?: string | null
+          status?: Database["public"]["Enums"]["listing_status"]
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_read: boolean
+          listing_id: string | null
+          receiver_id: string
+          sender_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          listing_id?: string | null
+          receiver_id: string
+          sender_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          listing_id?: string | null
+          receiver_id?: string
+          sender_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          city: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          is_banned: boolean
+          phone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          city?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          is_banned?: boolean
+          phone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          city?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          is_banned?: boolean
+          phone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          created_at: string
+          id: string
+          listing_id: string
+          reason: string
+          reporter_id: string
+          resolved_at: string | null
+          status: Database["public"]["Enums"]["report_status"]
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          listing_id: string
+          reason: string
+          reporter_id: string
+          resolved_at?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          listing_id?: string
+          reason?: string
+          reporter_id?: string
+          resolved_at?: string | null
+          status?: Database["public"]["Enums"]["report_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_listing_id_fkey"
+            columns: ["listing_id"]
+            isOneToOne: false
+            referencedRelation: "listings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      listing_category: "parrots" | "pigeons" | "hens" | "exotic" | "others"
+      listing_status: "active" | "sold" | "pending"
+      report_status: "open" | "resolved" | "dismissed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +368,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      listing_category: ["parrots", "pigeons", "hens", "exotic", "others"],
+      listing_status: ["active", "sold", "pending"],
+      report_status: ["open", "resolved", "dismissed"],
+    },
   },
 } as const
