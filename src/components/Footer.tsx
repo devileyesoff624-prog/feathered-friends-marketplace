@@ -29,14 +29,14 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
-            <h4 className="font-display font-semibold mb-3">
-            </h4>
-            
+          
 
 
 
-          </div>
+
+
+
+
         </div>
 
         <div className="pt-6 border-t border-primary-foreground/10 text-center">
