@@ -25,13 +25,13 @@ const SellerCTA = () => {
             </div>
             <div className="flex items-center gap-2 text-primary-foreground/80">
               <Shield className="w-4 h-4 text-accent" />
-              <span className="text-sm">Verified buyers</span>
+              <span className="text-center font-thin text-sm">Direct conversation with  buyers</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>);
+
 };
 
 export default SellerCTA;
