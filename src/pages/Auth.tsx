@@ -4,7 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Bird, Mail, Lock, User, Eye, EyeOff } from "lucide-react";
+import { Bird, Mail, Lock, User, Eye, EyeOff, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Auth = () => {
@@ -12,6 +12,7 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ const Auth = () => {
           email,
           password,
           options: {
-            data: { display_name: displayName },
+            data: { display_name: displayName, phone },
             emailRedirectTo: window.location.origin,
           },
         });
@@ -90,6 +91,22 @@ const Auth = () => {
                 </div>
               </div>
             )}
+
+            <div>
+              <Label htmlFor="phone">Phone Number</Label>
+              <div className="relative mt-1.5">
+                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+92 300 1234567"
+                  className="pl-10"
+                  required
+                />
+              </div>
+            </div>
 
             <div>
               <Label htmlFor="email">Email</Label>
