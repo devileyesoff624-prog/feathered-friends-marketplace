@@ -30,12 +30,12 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="font-display font-semibold mb-3">Support</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">Help Center</a></li>
-              <li><a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">Safety Tips</a></li>
-              <li><a href="#" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">Contact Us</a></li>
-            </ul>
+            <h4 className="font-display font-semibold mb-3">
+            </h4>
+            
+
+
+
           </div>
         </div>
 
@@ -43,8 +43,8 @@ const Footer = () => {
           <p className="text-primary-foreground/40 text-sm">© 2026 BirdMarket. All rights reserved.</p>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 };
 
 export default Footer;
