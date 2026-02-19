@@ -25,7 +25,6 @@ const HeroSection = () => {
     };
     fetchStats();
   }, []);
-  const navigate = useNavigate();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
