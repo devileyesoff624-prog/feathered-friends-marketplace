@@ -12,7 +12,7 @@ const Footer = () => {
                 <Bird className="w-4 h-4 text-primary-foreground" />
               </div>
               <span className="font-display text-lg font-bold">
-                Bird<span className="text-accent">Market</span>
+                Bird <span className="text-accent">Bazaar</span>
               </span>
             </Link>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
