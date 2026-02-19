@@ -21,28 +21,28 @@ const Navbar = () => {
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="Bird Bazaar" className="w-8 h-8" />
           <span className="font-display text-lg font-bold text-foreground">
-            Bird <span className="text-primary">Bazaar</span>
+            Bird <span className="text-[sidebar-accent-foreground] text-black">Bazaar</span>
           </span>
         </Link>
 
         <div className="hidden md:flex items-center gap-6">
           <Link to="/browse" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Browse</Link>
-          {user && (
-            <>
+          {user &&
+          <>
               <Link to="/dashboard" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">My Listings</Link>
               <Link to="/messages" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Messages</Link>
             </>
-          )}
-          {isAdmin && (
-            <Link to="/admin" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
+          }
+          {isAdmin &&
+          <Link to="/admin" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1">
               <Shield className="w-3.5 h-3.5" /> Admin
             </Link>
-          )}
+          }
         </div>
 
         <div className="hidden md:flex items-center gap-2">
-          {user ? (
-            <>
+          {user ?
+          <>
               <Button variant="default" size="sm" asChild>
                 <Link to="/create-listing"><Plus className="w-4 h-4 mr-1" /> Sell</Link>
               </Button>
@@ -55,9 +55,9 @@ const Navbar = () => {
               <Button variant="ghost" size="icon" onClick={handleSignOut}>
                 <LogOut className="w-5 h-5" />
               </Button>
-            </>
-          ) : (
-            <>
+            </> :
+
+          <>
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/auth">Sign In</Link>
               </Button>
@@ -65,7 +65,7 @@ const Navbar = () => {
                 <Link to="/auth">Get Started</Link>
               </Button>
             </>
-          )}
+          }
         </div>
 
         <button className="md:hidden p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
@@ -73,12 +73,12 @@ const Navbar = () => {
         </button>
       </div>
 
-      {isMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background animate-fade-up">
+      {isMenuOpen &&
+      <div className="md:hidden border-t border-border bg-background animate-fade-up">
           <div className="container py-4 flex flex-col gap-3">
             <Link to="/browse" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Browse</Link>
-            {user && (
-              <>
+            {user &&
+          <>
                 <Link to="/dashboard" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>My Listings</Link>
                 <Link to="/messages" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Messages</Link>
                 <Link to="/profile" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Profile</Link>
@@ -86,9 +86,9 @@ const Navbar = () => {
                 {isAdmin && <Link to="/admin" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Admin</Link>}
                 <button onClick={handleSignOut} className="text-sm font-medium py-2 text-left text-destructive">Sign Out</button>
               </>
-            )}
-            {!user && (
-              <div className="flex gap-2 pt-2">
+          }
+            {!user &&
+          <div className="flex gap-2 pt-2">
                 <Button variant="outline" className="flex-1" asChild>
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>Sign In</Link>
                 </Button>
@@ -96,12 +96,12 @@ const Navbar = () => {
                   <Link to="/auth" onClick={() => setIsMenuOpen(false)}>Get Started</Link>
                 </Button>
               </div>
-            )}
+          }
           </div>
         </div>
-      )}
-    </nav>
-  );
+      }
+    </nav>);
+
 };
 
 export default Navbar;
