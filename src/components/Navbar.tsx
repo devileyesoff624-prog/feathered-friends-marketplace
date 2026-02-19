@@ -1,4 +1,5 @@
-import { Bird, Menu, X, MessageCircle, User, LogOut, Shield, Plus } from "lucide-react";
+import { Menu, X, MessageCircle, User, LogOut, Shield, Plus } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,9 +19,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="container flex items-center justify-between h-16">
         <Link to="/" className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-gradient-hero">
-            <Bird className="w-5 h-5 text-primary-foreground" />
-          </div>
+          <img src={logo} alt="Bird Bazaar" className="w-8 h-8" />
           <span className="font-display text-lg font-bold text-foreground">
             Bird <span className="text-primary">Bazaar</span>
           </span>
