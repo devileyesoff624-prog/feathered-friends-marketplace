@@ -22,7 +22,7 @@ const Navbar = () => {
             <Bird className="w-5 h-5 text-primary-foreground" />
           </div>
           <span className="font-display text-lg font-bold text-foreground">
-            Bird<span className="text-primary">Market</span>
+            Bird <span className="text-primary">Bazaar</span>
           </span>
         </Link>
 
