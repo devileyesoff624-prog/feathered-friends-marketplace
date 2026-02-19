@@ -72,15 +72,15 @@ const HeroSection = () => {
 
           <div className="flex flex-wrap gap-6 text-primary-foreground/90">
             <div>
-              <p className="text-2xl font-bold font-display">5,000+</p>
+              <p className="text-2xl font-bold font-display">{stats.listings.toLocaleString()}</p>
               <p className="text-xs text-primary-foreground/60">Birds Listed</p>
             </div>
             <div>
-              <p className="text-2xl font-bold font-display">2,500+</p>
+              <p className="text-2xl font-bold font-display">{stats.sold.toLocaleString()}</p>
               <p className="text-xs text-primary-foreground/60">Happy Owners</p>
             </div>
             <div>
-              <p className="text-2xl font-bold font-display">500+</p>
+              <p className="text-2xl font-bold font-display">{stats.sellers.toLocaleString()}</p>
               <p className="text-xs text-primary-foreground/60">Trusted Sellers</p>
             </div>
           </div>
