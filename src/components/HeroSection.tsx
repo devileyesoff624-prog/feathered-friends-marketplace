@@ -1,12 +1,30 @@
 import { Search, Bird, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import heroBird from "@/assets/hero-bird.jpg";
 
 const HeroSection = () => {
   const [search, setSearch] = useState("");
+  const [stats, setStats] = useState({ listings: 0, sold: 0, sellers: 0 });
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      const [listingsRes, soldRes, sellersRes] = await Promise.all([
+        supabase.from("listings").select("id", { count: "exact", head: true }),
+        supabase.from("listings").select("id", { count: "exact", head: true }).eq("status", "sold"),
+        supabase.from("listings").select("user_id", { count: "exact", head: true }),
+      ]);
+      setStats({
+        listings: listingsRes.count ?? 0,
+        sold: soldRes.count ?? 0,
+        sellers: sellersRes.count ?? 0,
+      });
+    };
+    fetchStats();
+  }, []);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,15 +72,15 @@ const HeroSection = () => {
 
           <div className="flex flex-wrap gap-6 text-primary-foreground/90">
             <div>
-              <p className="text-2xl font-bold font-display">5,000+</p>
+              <p className="text-2xl font-bold font-display">{stats.listings.toLocaleString()}</p>
               <p className="text-xs text-primary-foreground/60">Birds Listed</p>
             </div>
             <div>
-              <p className="text-2xl font-bold font-display">2,500+</p>
+              <p className="text-2xl font-bold font-display">{stats.sold.toLocaleString()}</p>
               <p className="text-xs text-primary-foreground/60">Happy Owners</p>
             </div>
             <div>
-              <p className="text-2xl font-bold font-display">500+</p>
+              <p className="text-2xl font-bold font-display">{stats.sellers.toLocaleString()}</p>
               <p className="text-xs text-primary-foreground/60">Trusted Sellers</p>
             </div>
           </div>
