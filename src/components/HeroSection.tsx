@@ -1,11 +1,30 @@
 import { Search, Bird, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 import heroBird from "@/assets/hero-bird.jpg";
 
 const HeroSection = () => {
   const [search, setSearch] = useState("");
+  const [stats, setStats] = useState({ listings: 0, sold: 0, sellers: 0 });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      const [listingsRes, soldRes, sellersRes] = await Promise.all([
+        supabase.from("listings").select("id", { count: "exact", head: true }),
+        supabase.from("listings").select("id", { count: "exact", head: true }).eq("status", "sold"),
+        supabase.from("listings").select("user_id", { count: "exact", head: true }),
+      ]);
+      setStats({
+        listings: listingsRes.count ?? 0,
+        sold: soldRes.count ?? 0,
+        sellers: sellersRes.count ?? 0,
+      });
+    };
+    fetchStats();
+  }, []);
   const navigate = useNavigate();
 
   const handleSearch = (e: React.FormEvent) => {
