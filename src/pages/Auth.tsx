@@ -62,7 +62,7 @@ const Auth = () => {
               <Bird className="w-6 h-6 text-primary-foreground" />
             </div>
             <span className="font-display text-2xl font-bold text-foreground">
-              Bird<span className="text-primary">Market</span>
+              Bird <span className="text-primary">Bazaar</span>
             </span>
           </a>
           <h1 className="font-display text-2xl font-bold text-foreground">
