@@ -34,20 +34,20 @@ const Auth = () => {
           password,
           options: {
             data: { display_name: displayName, phone },
-            emailRedirectTo: window.location.origin,
-          },
+            emailRedirectTo: window.location.origin
+          }
         });
         if (error) throw error;
         toast({
           title: "Account created!",
-          description: "Please check your email to verify your account.",
+          description: "Please check your email to verify your account."
         });
       }
     } catch (error: any) {
       toast({
         title: "Error",
         description: error.message,
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setLoading(false);
@@ -59,7 +59,7 @@ const Auth = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <a href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="p-2.5 rounded-xl bg-gradient-hero shadow-glow">
+            <div className="p-2.5 rounded-xl bg-gradient-hero shadow-glow text-primary-foreground">
               <img src={authLogo} alt="Bird Bazaar" className="w-6 h-6" />
             </div>
             <span className="font-display text-2xl font-bold text-foreground">
@@ -76,22 +76,22 @@ const Auth = () => {
 
         <div className="bg-card rounded-2xl border border-border p-6 shadow-soft">
           <form onSubmit={handleSubmit} className="space-y-4">
-            {!isLogin && (
-              <div>
+            {!isLogin &&
+            <div>
                 <Label htmlFor="name">Display Name</Label>
                 <div className="relative mt-1.5">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
-                    id="name"
-                    value={displayName}
-                    onChange={(e) => setDisplayName(e.target.value)}
-                    placeholder="Your name"
-                    className="pl-10"
-                    required
-                  />
+                  id="name"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  placeholder="Your name"
+                  className="pl-10"
+                  required />
+
                 </div>
               </div>
-            )}
+            }
 
             <div>
               <Label htmlFor="phone">Phone Number</Label>
@@ -104,8 +104,8 @@ const Auth = () => {
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="+92 300 1234567"
                   className="pl-10"
-                  required
-                />
+                  required />
+
               </div>
             </div>
 
@@ -120,8 +120,8 @@ const Auth = () => {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@example.com"
                   className="pl-10"
-                  required
-                />
+                  required />
+
               </div>
             </div>
 
@@ -137,13 +137,13 @@ const Auth = () => {
                   placeholder="••••••••"
                   className="pl-10 pr-10"
                   required
-                  minLength={6}
-                />
+                  minLength={6} />
+
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                >
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
+
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
@@ -157,15 +157,15 @@ const Auth = () => {
           <div className="mt-6 text-center">
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
+              className="text-sm text-muted-foreground hover:text-primary transition-colors">
+
               {isLogin ? "Don't have an account? Sign up" : "Already have an account? Sign in"}
             </button>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default Auth;
