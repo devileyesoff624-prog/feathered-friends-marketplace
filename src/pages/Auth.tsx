@@ -4,7 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Bird, Mail, Lock, User, Eye, EyeOff, Phone } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, Phone } from "lucide-react";
+import authLogo from "@/assets/auth-logo.png";
 import { useToast } from "@/hooks/use-toast";
 
 const Auth = () => {
@@ -59,7 +60,7 @@ const Auth = () => {
         <div className="text-center mb-8">
           <a href="/" className="inline-flex items-center gap-2 mb-6">
             <div className="p-2.5 rounded-xl bg-gradient-hero shadow-glow">
-              <Bird className="w-6 h-6 text-primary-foreground" />
+              <img src={authLogo} alt="Bird Bazaar" className="w-6 h-6" />
             </div>
             <span className="font-display text-2xl font-bold text-foreground">
               Bird <span className="text-primary">Bazaar</span>
