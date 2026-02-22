@@ -59,7 +59,7 @@ const Auth = () => {
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <a href="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="p-2.5 rounded-xl bg-gradient-hero shadow-glow text-primary-foreground bg-primary-foreground border-primary-foreground">
+            <div className="">
               <img src={authLogo} alt="Bird Bazaar" className="w-6 h-6" />
             </div>
             <span className="font-display text-2xl font-bold text-foreground">
