@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-primary-foreground py-12">
+    <footer className="text-primary-foreground py-12 bg-popover-foreground">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <Link to="/" className="flex items-center gap-2 mb-3">
               <div className="p-1.5 rounded-lg bg-gradient-hero">
-                <Bird className="w-4 h-4 text-primary-foreground" />
+                <Bird className="" />
               </div>
               <span className="font-display text-lg font-bold">
-                Bird <span className="text-accent">Bazaar</span>
+                Bird <span className="text-current">Bazaar</span>
               </span>
             </Link>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
