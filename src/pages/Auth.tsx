@@ -4,7 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Bird, Mail, Lock, User, Eye, EyeOff, Phone } from "lucide-react";
+import { Mail, Lock, User, Eye, EyeOff, Phone } from "lucide-react";
+import authLogo from "@/assets/auth-logo.png";
 import { useToast } from "@/hooks/use-toast";
 
 const Auth = () => {
