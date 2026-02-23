@@ -8,7 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <Link to="/" className="flex items-center gap-2 mb-3">
-              <div className="p-1.5 rounded-lg bg-gradient-hero">
+              <div className="p-1.5 rounded-lg bg-gradient-hero text-primary-foreground bg-primary-foreground border-primary-foreground">
                 <Bird className="" />
               </div>
               <span className="font-display text-lg font-bold">
