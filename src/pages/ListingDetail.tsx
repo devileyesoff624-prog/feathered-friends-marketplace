@@ -51,16 +51,26 @@ const ListingDetail = () => {
 
   const handleReport = async () => {
     if (!user) { navigate("/auth"); return; }
-    const reason = prompt("Why are you reporting this listing?");
+    const reason = prompt("Why are you reporting this listing? (max 500 characters)");
     if (!reason) return;
+
+    const trimmedReason = reason.trim();
+    if (trimmedReason.length === 0) {
+      toast({ title: "Error", description: "Please provide a reason for the report.", variant: "destructive" });
+      return;
+    }
+    if (trimmedReason.length > 500) {
+      toast({ title: "Error", description: "Report reason must be 500 characters or less.", variant: "destructive" });
+      return;
+    }
 
     const { error } = await supabase.from("reports").insert({
       reporter_id: user.id,
       listing_id: listing.id,
-      reason,
+      reason: trimmedReason,
     });
     if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: "Error", description: sanitizeError(error), variant: "destructive" });
     } else {
       toast({ title: "Report submitted", description: "We'll review this listing." });
     }

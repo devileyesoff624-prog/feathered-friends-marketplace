@@ -33,7 +33,7 @@ const Dashboard = () => {
     if (!confirm("Delete this listing?")) return;
     const { error } = await supabase.from("listings").delete().eq("id", id);
     if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: "Error", description: sanitizeError(error), variant: "destructive" });
     } else {
       setListings((prev) => prev.filter((l) => l.id !== id));
       toast({ title: "Listing deleted" });
@@ -43,7 +43,7 @@ const Dashboard = () => {
   const handleStatusChange = async (id: string, status: string) => {
     const { error } = await supabase.from("listings").update({ status: status as any }).eq("id", id);
     if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: "Error", description: sanitizeError(error), variant: "destructive" });
     } else {
       setListings((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
     }

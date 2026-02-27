@@ -62,7 +62,7 @@ const Profile = () => {
       .eq("user_id", user.id);
 
     if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: "Error", description: sanitizeError(error), variant: "destructive" });
     } else {
       await refreshProfile();
       toast({ title: "Profile updated!" });

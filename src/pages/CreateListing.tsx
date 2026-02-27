@@ -97,7 +97,7 @@ const CreateListing = () => {
       toast({ title: "Listing created!", description: "Your bird listing is now live." });
       navigate("/dashboard");
     } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: "Error", description: sanitizeError(err), variant: "destructive" });
     } finally {
       setLoading(false);
     }
