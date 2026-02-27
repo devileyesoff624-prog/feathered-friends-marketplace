@@ -39,7 +39,7 @@ const Profile = () => {
     const path = `${user.id}/avatar.${ext}`;
 
     const { error } = await supabase.storage.from("avatars").upload(path, file, { upsert: true });
-    if (error) { toast({ title: "Upload failed", description: error.message, variant: "destructive" }); return; }
+    if (error) { toast({ title: "Upload failed", description: sanitizeError(error), variant: "destructive" }); return; }
 
     const { data } = supabase.storage.from("avatars").getPublicUrl(path);
     await supabase.from("profiles").update({ avatar_url: data.publicUrl }).eq("user_id", user.id);
