@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Trash2, Eye, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeError } from "@/lib/sanitize-error";
 
 const Dashboard = () => {
   const { user } = useAuth();
