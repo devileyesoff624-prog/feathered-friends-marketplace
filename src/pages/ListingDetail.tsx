@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { MapPin, MessageCircle, Phone, Flag, ArrowLeft, Calendar, Heart, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeError } from "@/lib/sanitize-error";
 
 const ListingDetail = () => {
   const { id } = useParams();
