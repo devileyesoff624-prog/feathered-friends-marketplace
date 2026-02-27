@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeError } from "@/lib/sanitize-error";
 import { Camera, X, Loader2 } from "lucide-react";
 
 const categories = [
@@ -96,7 +97,7 @@ const CreateListing = () => {
       toast({ title: "Listing created!", description: "Your bird listing is now live." });
       navigate("/dashboard");
     } catch (err: any) {
-      toast({ title: "Error", description: err.message, variant: "destructive" });
+      toast({ title: "Error", description: sanitizeError(err), variant: "destructive" });
     } finally {
       setLoading(false);
     }

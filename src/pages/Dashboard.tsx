@@ -6,6 +6,7 @@ import Navbar from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit, Trash2, Eye, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeError } from "@/lib/sanitize-error";
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -32,7 +33,7 @@ const Dashboard = () => {
     if (!confirm("Delete this listing?")) return;
     const { error } = await supabase.from("listings").delete().eq("id", id);
     if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: "Error", description: sanitizeError(error), variant: "destructive" });
     } else {
       setListings((prev) => prev.filter((l) => l.id !== id));
       toast({ title: "Listing deleted" });
@@ -42,7 +43,7 @@ const Dashboard = () => {
   const handleStatusChange = async (id: string, status: string) => {
     const { error } = await supabase.from("listings").update({ status: status as any }).eq("id", id);
     if (error) {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: "Error", description: sanitizeError(error), variant: "destructive" });
     } else {
       setListings((prev) => prev.map((l) => (l.id === id ? { ...l, status } : l)));
     }
