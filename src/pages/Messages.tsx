@@ -6,6 +6,9 @@ import Navbar from "@/components/Navbar";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+
+const MAX_MESSAGE_LENGTH = 2000;
 
 interface Conversation {
   other_user_id: string;
