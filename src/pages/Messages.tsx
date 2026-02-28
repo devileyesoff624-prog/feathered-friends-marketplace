@@ -150,10 +150,19 @@ const Messages = () => {
 
   const sendMessage = async () => {
     if (!newMessage.trim() || !user || !activeChat) return;
+    const trimmed = newMessage.trim();
+    if (trimmed.length > MAX_MESSAGE_LENGTH) {
+      toast({
+        title: "Message too long",
+        description: `Please keep messages under ${MAX_MESSAGE_LENGTH} characters.`,
+        variant: "destructive",
+      });
+      return;
+    }
     await supabase.from("messages").insert({
       sender_id: user.id,
       receiver_id: activeChat,
-      content: newMessage.trim(),
+      content: trimmed,
       listing_id: listingId || null,
     });
     setNewMessage("");
