@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Mail, Lock, User, Eye, EyeOff, Phone } from "lucide-react";
 import authLogo from "@/assets/auth-logo.png";
 import { useToast } from "@/hooks/use-toast";
+import { sanitizeAuthError } from "@/lib/sanitize-error";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
