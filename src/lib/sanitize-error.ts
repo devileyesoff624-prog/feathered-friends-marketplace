@@ -16,6 +16,21 @@ export const sanitizeError = (error: any): string => {
 
   if (code && errorMap[code]) return errorMap[code];
 
-  // Generic fallback — never expose raw error.message
+// Generic fallback — never expose raw error.message
   return "Something went wrong. Please try again.";
+};
+
+/**
+ * Sanitizes authentication errors to prevent leaking internal details.
+ */
+export const sanitizeAuthError = (error: any): string => {
+  const message = error?.message?.toLowerCase() || "";
+
+  if (message.includes("already registered")) return "This email is already in use.";
+  if (message.includes("invalid") || message.includes("credentials")) return "Invalid email or password.";
+  if (message.includes("rate limit")) return "Too many attempts. Please try again later.";
+  if (message.includes("email not confirmed")) return "Please verify your email address.";
+  if (message.includes("password")) return "Password does not meet requirements.";
+
+  return "Authentication failed. Please try again.";
 };

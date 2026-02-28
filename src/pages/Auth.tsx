@@ -47,7 +47,7 @@ const Auth = () => {
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message,
+        description: sanitizeAuthError(error),
         variant: "destructive"
       });
     } finally {
