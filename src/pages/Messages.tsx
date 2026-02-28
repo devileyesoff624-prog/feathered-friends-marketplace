@@ -232,13 +232,20 @@ const Messages = () => {
                     <div ref={messagesEnd} />
                   </div>
                   <div className="p-4 border-t border-border flex gap-2">
-                    <Input
-                      value={newMessage}
-                      onChange={(e) => setNewMessage(e.target.value)}
-                      onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-                      placeholder="Type a message..."
-                      className="flex-1"
-                    />
+                    <div className="flex-1 flex flex-col gap-1">
+                      <Input
+                        value={newMessage}
+                        onChange={(e) => setNewMessage(e.target.value)}
+                        onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+                        placeholder="Type a message..."
+                        maxLength={MAX_MESSAGE_LENGTH}
+                      />
+                      {newMessage.length > MAX_MESSAGE_LENGTH * 0.8 && (
+                        <span className={`text-xs ${newMessage.length > MAX_MESSAGE_LENGTH ? "text-destructive" : "text-muted-foreground"}`}>
+                          {newMessage.length}/{MAX_MESSAGE_LENGTH}
+                        </span>
+                      )}
+                    </div>
                     <Button onClick={sendMessage} size="icon">
                       <Send className="w-4 h-4" />
                     </Button>
