@@ -67,7 +67,7 @@ const Messages = () => {
 
       const ids = Object.keys(convMap);
       if (ids.length > 0) {
-        const { data: profiles } = await supabase.from("profiles").select("user_id, display_name, avatar_url").in("user_id", ids);
+        const { data: profiles } = await supabase.from("profiles_public" as any).select("user_id, display_name, avatar_url").in("user_id", ids);
         profiles?.forEach((p) => {
           if (convMap[p.user_id]) {
             convMap[p.user_id].other_user_name = p.display_name || "User";
