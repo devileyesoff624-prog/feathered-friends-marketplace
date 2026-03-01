@@ -67,7 +67,7 @@ const Messages = () => {
 
       const ids = Object.keys(convMap);
       if (ids.length > 0) {
-        const { data: profiles } = await supabase.from("profiles").select("user_id, display_name, avatar_url").in("user_id", ids);
+        const { data: profiles } = await supabase.from("profiles_public" as any).select("user_id, display_name, avatar_url").in("user_id", ids) as { data: { user_id: string; display_name: string | null; avatar_url: string | null }[] | null };
         profiles?.forEach((p) => {
           if (convMap[p.user_id]) {
             convMap[p.user_id].other_user_name = p.display_name || "User";
@@ -79,7 +79,7 @@ const Messages = () => {
       // Also add the "to" user if not in conversations yet
       const toUser = searchParams.get("to");
       if (toUser && !convMap[toUser]) {
-        const { data: p } = await supabase.from("profiles").select("user_id, display_name, avatar_url").eq("user_id", toUser).single();
+        const { data: p } = await supabase.from("profiles_public" as any).select("user_id, display_name, avatar_url").eq("user_id", toUser).single() as { data: { user_id: string; display_name: string | null; avatar_url: string | null } | null };
         if (p) {
           convMap[toUser] = {
             other_user_id: toUser,

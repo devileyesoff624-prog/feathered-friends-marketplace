@@ -31,11 +31,11 @@ const ListingDetail = () => {
       if (data) {
         setListing(data);
         setPhotos(data.listing_photos || []);
-        const { data: profile } = await supabase
-          .from("profiles")
-          .select("user_id, display_name, avatar_url, city, bio, phone")
-          .eq("user_id", data.user_id)
-          .single();
+        // Use public view (excludes phone) for non-owner profile lookups
+        const isOwner = user?.id === data.user_id;
+        const { data: profile } = isOwner
+          ? await supabase.from("profiles").select("user_id, display_name, avatar_url, city, bio, phone").eq("user_id", data.user_id).single()
+          : await supabase.from("profiles_public" as any).select("user_id, display_name, avatar_url, city, bio").eq("user_id", data.user_id).single();
         setSeller(profile);
       }
       setLoading(false);
