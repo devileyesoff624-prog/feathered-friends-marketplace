@@ -33,7 +33,7 @@ const ListingDetail = () => {
         setPhotos(data.listing_photos || []);
         const { data: profile } = await supabase
           .from("profiles")
-          .select("*")
+          .select("user_id, display_name, avatar_url, city, bio, phone")
           .eq("user_id", data.user_id)
           .single();
         setSeller(profile);
