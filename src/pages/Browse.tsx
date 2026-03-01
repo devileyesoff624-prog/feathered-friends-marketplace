@@ -41,7 +41,10 @@ const Browse = () => {
       .eq("status", "active");
 
     if (search) {
-      query = query.or(`title.ilike.%${search}%,species.ilike.%${search}%,description.ilike.%${search}%`);
+      const sanitized = search.trim().slice(0, 100).replace(/[%_\\]/g, '\\$&');
+      if (sanitized) {
+        query = query.or(`title.ilike.%${sanitized}%,species.ilike.%${sanitized}%,description.ilike.%${sanitized}%`);
+      }
     }
     if (category) query = query.eq("category", category as any);
     if (city) query = query.ilike("city", `%${city}%`);
