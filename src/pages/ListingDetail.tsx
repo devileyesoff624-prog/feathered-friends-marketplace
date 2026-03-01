@@ -33,7 +33,7 @@ const ListingDetail = () => {
         setPhotos(data.listing_photos || []);
         const { data: profile } = await supabase
           .from("profiles")
-          .select("*")
+          .select("user_id, display_name, avatar_url, city, bio, phone")
           .eq("user_id", data.user_id)
           .single();
         setSeller(profile);
@@ -202,14 +202,14 @@ const ListingDetail = () => {
                   <Button className="w-full" onClick={handleContact}>
                     <MessageCircle className="w-4 h-4 mr-2" /> Message Seller
                   </Button>
-                  {seller?.phone && (
+                  {user && seller?.phone && (
                     <Button variant="outline" className="w-full" asChild>
                       <a href={`tel:${seller.phone}`}>
                         <Phone className="w-4 h-4 mr-2" /> Call Seller
                       </a>
                     </Button>
                   )}
-                  {seller?.phone && (
+                  {user && seller?.phone && (
                     <Button variant="outline" className="w-full" asChild>
                       <a href={`https://wa.me/${seller.phone.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer">
                         WhatsApp
