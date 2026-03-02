@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { sanitizeError } from "@/lib/sanitize-error";
+import { findRestrictedSpecies } from "@/lib/restricted-species";
 import { Camera, X, Loader2 } from "lucide-react";
 
 const categories = [
