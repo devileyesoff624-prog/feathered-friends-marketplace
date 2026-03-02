@@ -78,38 +78,38 @@ const Auth = () => {
 
         <div className="bg-card rounded-2xl border border-border p-6 shadow-soft">
           <form onSubmit={handleSubmit} className="space-y-4">
-            {!isLogin &&
-            <div>
-                <Label htmlFor="name">Display Name</Label>
-                <div className="relative mt-1.5">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                  <Input
-                  id="name"
-                  value={displayName}
-                  onChange={(e) => setDisplayName(e.target.value)}
-                  placeholder="Your name"
-                  className="pl-10"
-                  required />
-
+            {!isLogin && (
+              <>
+                <div>
+                  <Label htmlFor="name">Display Name</Label>
+                  <div className="relative mt-1.5">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      id="name"
+                      value={displayName}
+                      onChange={(e) => setDisplayName(e.target.value)}
+                      placeholder="Your name"
+                      className="pl-10"
+                      required />
+                  </div>
                 </div>
-              </div>
-            }
 
-            <div>
-              <Label htmlFor="phone">Phone Number</Label>
-              <div className="relative mt-1.5">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input
-                  id="phone"
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="+92 300 1234567"
-                  className="pl-10"
-                  required />
-
-              </div>
-            </div>
+                <div>
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <div className="relative mt-1.5">
+                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      placeholder="+92 300 1234567"
+                      className="pl-10"
+                      required />
+                  </div>
+                </div>
+              </>
+            )}
 
             <div>
               <Label htmlFor="email">Email</Label>
