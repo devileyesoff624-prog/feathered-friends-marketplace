@@ -63,6 +63,19 @@ const CreateListing = () => {
     setLoading(true);
 
     try {
+      // Check for restricted species client-side
+      const combinedText = `${form.title} ${form.species} ${form.description}`;
+      const restricted = findRestrictedSpecies(combinedText);
+      if (restricted) {
+        toast({
+          title: "Protected Species",
+          description: `"${restricted}" is a protected/endangered species and cannot be listed for sale.`,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
       const { data: listing, error } = await supabase
         .from("listings")
         .insert({
