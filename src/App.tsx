@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Messages from "./pages/Messages";
 import Admin from "./pages/Admin";
+import Favorites from "./pages/Favorites";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
+            <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />
             <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>

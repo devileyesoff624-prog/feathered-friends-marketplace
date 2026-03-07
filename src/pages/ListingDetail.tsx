@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { MapPin, MessageCircle, Phone, Flag, ArrowLeft, Calendar, Heart, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { sanitizeError } from "@/lib/sanitize-error";
+import { useFavorites } from "@/hooks/use-favorites";
+import FavoriteButton from "@/components/FavoriteButton";
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -19,6 +21,7 @@ const ListingDetail = () => {
   const [seller, setSeller] = useState<any>(null);
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [loading, setLoading] = useState(true);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -31,7 +34,6 @@ const ListingDetail = () => {
       if (data) {
         setListing(data);
         setPhotos(data.listing_photos || []);
-        // Use public view (excludes phone) for non-owner profile lookups
         const isOwner = user?.id === data.user_id;
         const { data: profile } = isOwner
           ? await supabase.from("profiles").select("user_id, display_name, avatar_url, city, bio, phone").eq("user_id", data.user_id).single()
@@ -115,12 +117,15 @@ const ListingDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Photos */}
             <div className="lg:col-span-2">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden bg-muted mb-3">
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden bg-muted mb-3">
                 {photos.length > 0 ? (
                   <img src={photos[selectedPhoto]?.url} alt={listing.title} className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center text-muted-foreground">No Photos</div>
                 )}
+                <div className="absolute top-3 right-3">
+                  <FavoriteButton listingId={listing.id} isFavorite={isFavorite(listing.id)} onToggle={toggleFavorite} size="md" />
+                </div>
               </div>
               {photos.length > 1 && (
                 <div className="flex gap-2 overflow-x-auto pb-2">

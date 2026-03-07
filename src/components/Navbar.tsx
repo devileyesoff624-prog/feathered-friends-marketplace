@@ -1,4 +1,4 @@
-import { Menu, X, MessageCircle, User, LogOut, Shield, Plus } from "lucide-react";
+import { Menu, X, MessageCircle, User, LogOut, Shield, Plus, Heart } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
@@ -47,6 +47,9 @@ const Navbar = () => {
                 <Link to="/create-listing"><Plus className="w-4 h-4 mr-1" /> Sell</Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
+                <Link to="/favorites"><Heart className="w-5 h-5" /></Link>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
                 <Link to="/messages"><MessageCircle className="w-5 h-5" /></Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
@@ -80,6 +83,7 @@ const Navbar = () => {
             {user &&
           <>
                 <Link to="/dashboard" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>My Listings</Link>
+                <Link to="/favorites" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Favorites</Link>
                 <Link to="/messages" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Messages</Link>
                 <Link to="/profile" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Profile</Link>
                 <Link to="/create-listing" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Sell a Bird</Link>

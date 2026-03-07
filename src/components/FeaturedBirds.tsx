@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Link } from "react-router-dom";
 import { MapPin } from "lucide-react";
+import { useFavorites } from "@/hooks/use-favorites";
+import FavoriteButton from "@/components/FavoriteButton";
 
 const FeaturedBirds = () => {
   const [listings, setListings] = useState<any[]>([]);
+  const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
     const fetch = async () => {
@@ -38,12 +41,15 @@ const FeaturedBirds = () => {
                 to={`/listing/${listing.id}`}
                 className="group bg-card rounded-xl overflow-hidden border border-border shadow-soft hover:shadow-medium transition-all hover:-translate-y-0.5"
               >
-                <div className="aspect-square bg-muted overflow-hidden">
+                <div className="relative aspect-square bg-muted overflow-hidden">
                   {photo ? (
                     <img src={photo} alt={listing.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-muted-foreground text-sm">No Photo</div>
                   )}
+                  <div className="absolute top-2 right-2">
+                    <FavoriteButton listingId={listing.id} isFavorite={isFavorite(listing.id)} onToggle={toggleFavorite} />
+                  </div>
                 </div>
                 <div className="p-4">
                   <h3 className="font-display font-semibold text-foreground line-clamp-1">{listing.title}</h3>
