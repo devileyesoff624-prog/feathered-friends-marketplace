@@ -1,4 +1,4 @@
-import { Menu, X, MessageCircle, User, LogOut, Shield, Plus } from "lucide-react";
+import { Menu, X, MessageCircle, User, LogOut, Shield, Plus, Heart } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
