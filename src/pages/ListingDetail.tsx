@@ -140,7 +140,7 @@ const ListingDetail = () => {
               <div className="mt-6 space-y-4">
                 <div>
                   <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">{listing.title}</h1>
-                  <p className="text-2xl font-bold text-primary mt-1">${listing.price}</p>
+                  <p className="text-2xl font-bold text-primary mt-1">PKR {listing.price}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-3">
