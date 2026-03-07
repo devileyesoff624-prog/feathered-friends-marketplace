@@ -47,6 +47,9 @@ const Navbar = () => {
                 <Link to="/create-listing"><Plus className="w-4 h-4 mr-1" /> Sell</Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
+                <Link to="/favorites"><Heart className="w-5 h-5" /></Link>
+              </Button>
+              <Button variant="ghost" size="icon" asChild>
                 <Link to="/messages"><MessageCircle className="w-5 h-5" /></Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
