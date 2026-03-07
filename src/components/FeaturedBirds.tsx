@@ -49,7 +49,7 @@ const FeaturedBirds = () => {
                   <h3 className="font-display font-semibold text-foreground line-clamp-1">{listing.title}</h3>
                   <p className="text-sm text-muted-foreground capitalize">{listing.species || listing.category}</p>
                   <div className="flex items-center justify-between mt-2">
-                    <p className="font-display text-lg font-bold text-primary">PKR {Number(listing.price).toLocaleString()}</p>
+                    <p className="font-display text-lg font-bold text-primary">Rs. {Number(listing.price).toLocaleString()}</p>
                     {listing.city && (
                       <span className="text-xs text-muted-foreground flex items-center gap-0.5">
                         <MapPin className="w-3 h-3" /> {listing.city}

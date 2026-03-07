@@ -96,7 +96,7 @@ const Dashboard = () => {
                     <div className="flex-1 min-w-0">
                       <h3 className="font-medium text-foreground truncate">{listing.title}</h3>
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="font-bold text-primary">PKR {Number(listing.price).toLocaleString()}</span>
+                        <span className="font-bold text-primary">Rs. {Number(listing.price).toLocaleString()}</span>
                         {listing.city && (
                           <span className="text-xs text-muted-foreground flex items-center gap-0.5">
                             <MapPin className="w-3 h-3" /> {listing.city}

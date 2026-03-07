@@ -178,7 +178,7 @@ const CreateListing = () => {
                 <Input id="age" value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} placeholder="e.g. 6 months" className="mt-1.5" />
               </div>
               <div>
-                <Label htmlFor="price">Price (PKR) *</Label>
+                <Label htmlFor="price">Price (Rs.) *</Label>
                 <Input id="price" type="number" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} required min={0} className="mt-1.5" />
               </div>
               <div>
