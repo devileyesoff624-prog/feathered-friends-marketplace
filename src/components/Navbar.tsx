@@ -83,6 +83,7 @@ const Navbar = () => {
             {user &&
           <>
                 <Link to="/dashboard" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>My Listings</Link>
+                <Link to="/favorites" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Favorites</Link>
                 <Link to="/messages" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Messages</Link>
                 <Link to="/profile" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Profile</Link>
                 <Link to="/create-listing" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Sell a Bird</Link>
