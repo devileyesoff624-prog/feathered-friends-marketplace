@@ -140,7 +140,7 @@ const ListingDetail = () => {
               <div className="mt-6 space-y-4">
                 <div>
                   <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">{listing.title}</h1>
-                  <p className="text-2xl font-bold text-primary mt-1">PKR {Number(listing.price).toLocaleString()}</p>
+                  <p className="text-2xl font-bold text-primary mt-1">Rs. {Number(listing.price).toLocaleString()}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-3">
