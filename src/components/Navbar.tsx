@@ -48,8 +48,15 @@ const Navbar = () => {
               <Button variant="default" size="sm" asChild>
                 <Link to="/create-listing"><Plus className="w-4 h-4 mr-1" /> Sell</Link>
               </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/favorites"><Heart className="w-5 h-5" /></Link>
+              <Button variant="ghost" size="icon" asChild className="relative">
+                <Link to="/favorites">
+                  <Heart className="w-5 h-5" />
+                  {favoriteIds.size > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                      {favoriteIds.size > 9 ? "9+" : favoriteIds.size}
+                    </span>
+                  )}
+                </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
                 <Link to="/messages"><MessageCircle className="w-5 h-5" /></Link>
