@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useFavorites } from "@/hooks/use-favorites";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
