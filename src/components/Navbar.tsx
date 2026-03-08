@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, profile, isAdmin, signOut } = useAuth();
   const { favoriteIds } = useFavorites();
+  const unreadCount = useUnreadCount();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
