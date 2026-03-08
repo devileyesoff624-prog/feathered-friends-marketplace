@@ -165,6 +165,7 @@ export type Database = {
           city: string | null
           created_at: string
           display_name: string | null
+          encryption_public_key: string | null
           id: string
           is_banned: boolean
           phone: string | null
@@ -177,6 +178,7 @@ export type Database = {
           city?: string | null
           created_at?: string
           display_name?: string | null
+          encryption_public_key?: string | null
           id?: string
           is_banned?: boolean
           phone?: string | null
@@ -189,6 +191,7 @@ export type Database = {
           city?: string | null
           created_at?: string
           display_name?: string | null
+          encryption_public_key?: string | null
           id?: string
           is_banned?: boolean
           phone?: string | null
