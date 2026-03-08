@@ -12,10 +12,12 @@ import Browse from "./pages/Browse";
 import ListingDetail from "./pages/ListingDetail";
 import CreateListing from "./pages/CreateListing";
 import Dashboard from "./pages/Dashboard";
+import EditListing from "./pages/EditListing";
 import Profile from "./pages/Profile";
 import Messages from "./pages/Messages";
 import Admin from "./pages/Admin";
 import Favorites from "./pages/Favorites";
+import SellerProfile from "./pages/SellerProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
