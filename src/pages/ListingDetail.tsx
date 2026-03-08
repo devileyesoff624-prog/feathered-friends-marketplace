@@ -189,19 +189,19 @@ const ListingDetail = () => {
             <div className="space-y-4">
               <div className="bg-card rounded-xl border border-border p-5 shadow-soft">
                 <h3 className="font-display font-semibold text-foreground mb-3">Seller</h3>
-                <div className="flex items-center gap-3 mb-4">
+                <Link to={`/seller/${seller?.user_id}`} className="flex items-center gap-3 mb-4 hover:opacity-80 transition-opacity">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
                     {seller?.display_name?.[0]?.toUpperCase() || "?"}
                   </div>
                   <div>
-                    <p className="font-medium text-foreground">{seller?.display_name || "Unknown"}</p>
+                    <p className="font-medium text-foreground hover:text-primary transition-colors">{seller?.display_name || "Unknown"}</p>
                     {seller?.city && (
                       <p className="text-sm text-muted-foreground flex items-center gap-1">
                         <MapPin className="w-3 h-3" /> {seller.city}
                       </p>
                     )}
                   </div>
-                </div>
+                </Link>
 
                 <div className="space-y-2">
                   <Button className="w-full" onClick={handleContact}>
