@@ -9,6 +9,7 @@ import { useFavorites } from "@/hooks/use-favorites";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, profile, isAdmin, signOut } = useAuth();
+  const { favoriteIds } = useFavorites();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
