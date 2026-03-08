@@ -12,10 +12,12 @@ import Browse from "./pages/Browse";
 import ListingDetail from "./pages/ListingDetail";
 import CreateListing from "./pages/CreateListing";
 import Dashboard from "./pages/Dashboard";
+import EditListing from "./pages/EditListing";
 import Profile from "./pages/Profile";
 import Messages from "./pages/Messages";
 import Admin from "./pages/Admin";
 import Favorites from "./pages/Favorites";
+import SellerProfile from "./pages/SellerProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +36,8 @@ const App = () => (
             <Route path="/listing/:id" element={<ListingDetail />} />
             <Route path="/create-listing" element={<ProtectedRoute><CreateListing /></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/edit-listing/:id" element={<ProtectedRoute><EditListing /></ProtectedRoute>} />
+            <Route path="/seller/:userId" element={<SellerProfile />} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} />
             <Route path="/favorites" element={<ProtectedRoute><Favorites /></ProtectedRoute>} />

@@ -117,6 +117,9 @@ const Dashboard = () => {
                       <Button variant="ghost" size="icon" asChild>
                         <Link to={`/listing/${listing.id}`}><Eye className="w-4 h-4" /></Link>
                       </Button>
+                      <Button variant="ghost" size="icon" asChild>
+                        <Link to={`/edit-listing/${listing.id}`}><Edit className="w-4 h-4" /></Link>
+                      </Button>
                       <Button variant="ghost" size="icon" onClick={() => handleDelete(listing.id)}>
                         <Trash2 className="w-4 h-4 text-destructive" />
                       </Button>

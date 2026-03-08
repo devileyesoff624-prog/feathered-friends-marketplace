@@ -5,11 +5,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { useFavorites } from "@/hooks/use-favorites";
+import { useUnreadCount } from "@/hooks/use-unread-count";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, profile, isAdmin, signOut } = useAuth();
   const { favoriteIds } = useFavorites();
+  const unreadCount = useUnreadCount();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -58,8 +60,15 @@ const Navbar = () => {
                   )}
                 </Link>
               </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <Link to="/messages"><MessageCircle className="w-5 h-5" /></Link>
+              <Button variant="ghost" size="icon" asChild className="relative">
+                <Link to="/messages">
+                  <MessageCircle className="w-5 h-5" />
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                      {unreadCount > 9 ? "9+" : unreadCount}
+                    </span>
+                  )}
+                </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
                 <Link to="/profile"><User className="w-5 h-5" /></Link>
