@@ -101,7 +101,7 @@ const CreateListing = () => {
         const compressed = await compressImage(file);
         const ext = compressed.name.split(".").pop() || "jpg";
         const path = `${listing.id}/${crypto.randomUUID()}.${ext}`;
-        const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, file);
+        const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, compressed);
         if (uploadErr) continue;
 
         const { data: urlData } = supabase.storage.from("listing-photos").getPublicUrl(path);
