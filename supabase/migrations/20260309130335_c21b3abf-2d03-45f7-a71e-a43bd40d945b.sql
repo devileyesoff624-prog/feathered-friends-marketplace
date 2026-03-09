@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX unique_open_report_per_listing ON public.reports (reporter_id, listing_id) WHERE status = 'open';
