@@ -11,6 +11,8 @@ import { useToast } from "@/hooks/use-toast";
 import { sanitizeError } from "@/lib/sanitize-error";
 import { findRestrictedSpecies } from "@/lib/restricted-species";
 import { Camera, X, Loader2, Trash2 } from "lucide-react";
+import { compressImage } from "@/lib/image-compress";
+import { pakistanCities } from "@/lib/pakistan-cities";
 
 const categories = [
   { value: "parrots", label: "Parrots" },
