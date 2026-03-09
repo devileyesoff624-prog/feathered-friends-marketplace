@@ -140,11 +140,12 @@ const EditListing = () => {
         await supabase.from("listing_photos").delete().eq("id", photoId);
       }
 
-      // Upload new photos
+      // Upload new photos (compressed)
       for (const file of newPhotos) {
-        const ext = file.name.split(".").pop();
+        const compressed = await compressImage(file);
+        const ext = compressed.name.split(".").pop() || "jpg";
         const path = `${id}/${crypto.randomUUID()}.${ext}`;
-        const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, file);
+        const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, compressed);
         if (uploadErr) continue;
         const { data: urlData } = supabase.storage.from("listing-photos").getPublicUrl(path);
         await supabase.from("listing_photos").insert({ listing_id: id, url: urlData.publicUrl });
