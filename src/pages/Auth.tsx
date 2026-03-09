@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Mail, Lock, User, Eye, EyeOff, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import authLogo from "@/assets/auth-logo.png";
 import { useToast } from "@/hooks/use-toast";
 import { sanitizeAuthError } from "@/lib/sanitize-error";

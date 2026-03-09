@@ -243,7 +243,10 @@ const EditListing = () => {
               </div>
               <div>
                 <Label htmlFor="city">City</Label>
-                <Input id="city" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="mt-1.5" />
+                <select id="city" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="mt-1.5 w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
+                  <option value="">Select City</option>
+                  {pakistanCities.map((c) => (<option key={c} value={c}>{c}</option>))}
+                </select>
               </div>
             </div>
 

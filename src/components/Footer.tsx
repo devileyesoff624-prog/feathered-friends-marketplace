@@ -29,7 +29,13 @@ const Footer = () => {
             </ul>
           </div>
 
-          
+          <div>
+            <h4 className="font-display font-semibold mb-3">Legal</h4>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/terms" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">Terms of Service</Link></li>
+              <li><Link to="/privacy" className="text-primary-foreground/60 hover:text-primary-foreground transition-colors">Privacy Policy</Link></li>
+            </ul>
+          </div>
 
 
 
