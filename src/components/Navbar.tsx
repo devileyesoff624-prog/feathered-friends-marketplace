@@ -101,11 +101,25 @@ const Navbar = () => {
             {user &&
           <>
                 <Link to="/dashboard" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>My Listings</Link>
-                <Link to="/favorites" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Favorites</Link>
-                <Link to="/messages" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Messages</Link>
+                <Link to="/favorites" className="text-sm font-medium py-2 flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                  Favorites
+                  {favoriteIds.size > 0 && (
+                    <span className="bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                      {favoriteIds.size > 9 ? "9+" : favoriteIds.size}
+                    </span>
+                  )}
+                </Link>
+                <Link to="/messages" className="text-sm font-medium py-2 flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                  Messages
+                  {unreadCount > 0 && (
+                    <span className="bg-destructive text-destructive-foreground text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                      {unreadCount > 9 ? "9+" : unreadCount}
+                    </span>
+                  )}
+                </Link>
                 <Link to="/profile" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Profile</Link>
                 <Link to="/create-listing" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Sell a Bird</Link>
-                {isAdmin && <Link to="/admin" className="text-sm font-medium py-2" onClick={() => setIsMenuOpen(false)}>Admin</Link>}
+                {isAdmin && <Link to="/admin" className="text-sm font-medium py-2 flex items-center gap-1" onClick={() => setIsMenuOpen(false)}><Shield className="w-3.5 h-3.5" /> Admin</Link>}
                 <button onClick={handleSignOut} className="text-sm font-medium py-2 text-left text-destructive">Sign Out</button>
               </>
           }

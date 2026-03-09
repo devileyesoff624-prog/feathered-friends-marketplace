@@ -11,6 +11,8 @@ import { useToast } from "@/hooks/use-toast";
 import { sanitizeError } from "@/lib/sanitize-error";
 import { findRestrictedSpecies } from "@/lib/restricted-species";
 import { Camera, X, Loader2, Trash2 } from "lucide-react";
+import { compressImage } from "@/lib/image-compress";
+import { pakistanCities } from "@/lib/pakistan-cities";
 
 const categories = [
   { value: "parrots", label: "Parrots" },
@@ -138,11 +140,12 @@ const EditListing = () => {
         await supabase.from("listing_photos").delete().eq("id", photoId);
       }
 
-      // Upload new photos
+      // Upload new photos (compressed)
       for (const file of newPhotos) {
-        const ext = file.name.split(".").pop();
+        const compressed = await compressImage(file);
+        const ext = compressed.name.split(".").pop() || "jpg";
         const path = `${id}/${crypto.randomUUID()}.${ext}`;
-        const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, file);
+        const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, compressed);
         if (uploadErr) continue;
         const { data: urlData } = supabase.storage.from("listing-photos").getPublicUrl(path);
         await supabase.from("listing_photos").insert({ listing_id: id, url: urlData.publicUrl });
@@ -240,7 +243,10 @@ const EditListing = () => {
               </div>
               <div>
                 <Label htmlFor="city">City</Label>
-                <Input id="city" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="mt-1.5" />
+                <select id="city" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="mt-1.5 w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
+                  <option value="">Select City</option>
+                  {pakistanCities.map((c) => (<option key={c} value={c}>{c}</option>))}
+                </select>
               </div>
             </div>
 

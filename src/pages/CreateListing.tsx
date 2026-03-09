@@ -11,6 +11,8 @@ import { useToast } from "@/hooks/use-toast";
 import { sanitizeError } from "@/lib/sanitize-error";
 import { findRestrictedSpecies } from "@/lib/restricted-species";
 import { Camera, X, Loader2 } from "lucide-react";
+import { compressImage } from "@/lib/image-compress";
+import { pakistanCities } from "@/lib/pakistan-cities";
 
 const categories = [
   { value: "parrots", label: "Parrots" },
@@ -94,11 +96,12 @@ const CreateListing = () => {
 
       if (error) throw error;
 
-      // Upload photos
+      // Upload photos (compressed)
       for (const file of photos) {
-        const ext = file.name.split(".").pop();
+        const compressed = await compressImage(file);
+        const ext = compressed.name.split(".").pop() || "jpg";
         const path = `${listing.id}/${crypto.randomUUID()}.${ext}`;
-        const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, file);
+        const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, compressed);
         if (uploadErr) continue;
 
         const { data: urlData } = supabase.storage.from("listing-photos").getPublicUrl(path);
@@ -183,7 +186,10 @@ const CreateListing = () => {
               </div>
               <div>
                 <Label htmlFor="city">City</Label>
-                <Input id="city" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} placeholder="e.g. Miami" className="mt-1.5" />
+                <select id="city" value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="mt-1.5 w-full h-10 px-3 rounded-md border border-input bg-background text-sm">
+                  <option value="">Select City</option>
+                  {pakistanCities.map((c) => (<option key={c} value={c}>{c}</option>))}
+                </select>
               </div>
             </div>
 

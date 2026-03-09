@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Mail, Lock, User, Eye, EyeOff, Phone } from "lucide-react";
+import { Link } from "react-router-dom";
 import authLogo from "@/assets/auth-logo.png";
 import { useToast } from "@/hooks/use-toast";
 import { sanitizeAuthError } from "@/lib/sanitize-error";
@@ -154,6 +155,14 @@ const Auth = () => {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Loading..." : isLogin ? "Sign In" : "Create Account"}
             </Button>
+
+            {isLogin && (
+              <div className="text-right">
+                <Link to="/forgot-password" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Forgot password?
+                </Link>
+              </div>
+            )}
           </form>
 
           <div className="relative my-6">
