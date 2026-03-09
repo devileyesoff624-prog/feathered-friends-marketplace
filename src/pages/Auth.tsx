@@ -154,6 +154,14 @@ const Auth = () => {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Loading..." : isLogin ? "Sign In" : "Create Account"}
             </Button>
+
+            {isLogin && (
+              <div className="text-right">
+                <Link to="/forgot-password" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Forgot password?
+                </Link>
+              </div>
+            )}
           </form>
 
           <div className="relative my-6">
