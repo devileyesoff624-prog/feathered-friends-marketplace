@@ -96,9 +96,10 @@ const CreateListing = () => {
 
       if (error) throw error;
 
-      // Upload photos
+      // Upload photos (compressed)
       for (const file of photos) {
-        const ext = file.name.split(".").pop();
+        const compressed = await compressImage(file);
+        const ext = compressed.name.split(".").pop() || "jpg";
         const path = `${listing.id}/${crypto.randomUUID()}.${ext}`;
         const { error: uploadErr } = await supabase.storage.from("listing-photos").upload(path, file);
         if (uploadErr) continue;
