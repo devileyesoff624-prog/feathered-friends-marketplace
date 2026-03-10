@@ -4,11 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, MapPin, SlidersHorizontal, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { MapPin, SlidersHorizontal, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useFavorites } from "@/hooks/use-favorites";
 import FavoriteButton from "@/components/FavoriteButton";
 import { pakistanCities } from "@/lib/pakistan-cities";
+import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 const categories = [
   { value: "", label: "All Categories" },
