@@ -4,11 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, MapPin, SlidersHorizontal, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { MapPin, SlidersHorizontal, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useFavorites } from "@/hooks/use-favorites";
 import FavoriteButton from "@/components/FavoriteButton";
 import { pakistanCities } from "@/lib/pakistan-cities";
+import SearchAutocomplete from "@/components/SearchAutocomplete";
 
 const categories = [
   { value: "", label: "All Categories" },
@@ -91,10 +92,11 @@ const Browse = () => {
           <div className="container py-8">
             <h1 className="font-display text-3xl font-bold text-foreground mb-4">Browse Birds</h1>
             <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-3">
-              <div className="relative flex-1">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <Input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by name, species..." className="pl-10" />
-              </div>
+              <SearchAutocomplete
+                value={search}
+                onChange={setSearch}
+                onSubmit={() => { setPage(0); fetchListings(); }}
+              />
               <div className="relative">
                 <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <select
