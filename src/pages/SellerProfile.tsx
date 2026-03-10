@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { MapPin, Calendar } from "lucide-react";
 import { useFavorites } from "@/hooks/use-favorites";
 import FavoriteButton from "@/components/FavoriteButton";
+import ReviewList from "@/components/ReviewList";
 import { format } from "date-fns";
 
 const SellerProfile = () => {
@@ -98,6 +99,12 @@ const SellerProfile = () => {
                 {seller.bio && <p className="text-muted-foreground mt-2 text-sm">{seller.bio}</p>}
               </div>
             </div>
+          </div>
+
+          {/* Reviews */}
+          <div className="bg-card rounded-xl border border-border p-6 shadow-soft mb-8">
+            <h2 className="font-display text-xl font-bold text-foreground mb-4">Reviews</h2>
+            <ReviewList sellerId={userId!} />
           </div>
 
           {/* Listings */}

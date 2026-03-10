@@ -10,6 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 import { sanitizeError } from "@/lib/sanitize-error";
 import { useFavorites } from "@/hooks/use-favorites";
 import FavoriteButton from "@/components/FavoriteButton";
+import ReviewForm from "@/components/ReviewForm";
+import ReviewList from "@/components/ReviewList";
 
 const ListingDetail = () => {
   const { id } = useParams();
@@ -21,6 +23,7 @@ const ListingDetail = () => {
   const [seller, setSeller] = useState<any>(null);
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [reviewRefresh, setReviewRefresh] = useState(0);
   const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
@@ -182,6 +185,19 @@ const ListingDetail = () => {
                     <p className="text-muted-foreground whitespace-pre-wrap">{listing.health_info}</p>
                   </div>
                 )}
+              </div>
+
+              {/* Reviews Section */}
+              <div className="mt-8 bg-card rounded-xl border border-border p-5 shadow-soft space-y-5">
+                <h3 className="font-display text-lg font-semibold text-foreground">Reviews</h3>
+                <ReviewList sellerId={listing.user_id} refreshKey={reviewRefresh} />
+                <div className="border-t border-border pt-4">
+                  <ReviewForm
+                    sellerId={listing.user_id}
+                    listingId={listing.id}
+                    onSubmitted={() => setReviewRefresh((r) => r + 1)}
+                  />
+                </div>
               </div>
             </div>
 
