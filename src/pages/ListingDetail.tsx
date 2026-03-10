@@ -10,6 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 import { sanitizeError } from "@/lib/sanitize-error";
 import { useFavorites } from "@/hooks/use-favorites";
 import FavoriteButton from "@/components/FavoriteButton";
+import ReviewForm from "@/components/ReviewForm";
+import ReviewList from "@/components/ReviewList";
 
 const ListingDetail = () => {
   const { id } = useParams();
