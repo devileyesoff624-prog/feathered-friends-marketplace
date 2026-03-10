@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { MapPin, Calendar } from "lucide-react";
 import { useFavorites } from "@/hooks/use-favorites";
 import FavoriteButton from "@/components/FavoriteButton";
+import ReviewList from "@/components/ReviewList";
 import { format } from "date-fns";
 
 const SellerProfile = () => {
