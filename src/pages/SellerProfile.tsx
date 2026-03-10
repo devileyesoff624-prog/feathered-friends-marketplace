@@ -101,6 +101,12 @@ const SellerProfile = () => {
             </div>
           </div>
 
+          {/* Reviews */}
+          <div className="bg-card rounded-xl border border-border p-6 shadow-soft mb-8">
+            <h2 className="font-display text-xl font-bold text-foreground mb-4">Reviews</h2>
+            <ReviewList sellerId={userId!} />
+          </div>
+
           {/* Listings */}
           <h2 className="font-display text-xl font-bold text-foreground mb-4">
             Active Listings ({listings.length})

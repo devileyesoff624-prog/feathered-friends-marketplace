@@ -186,6 +186,19 @@ const ListingDetail = () => {
                   </div>
                 )}
               </div>
+
+              {/* Reviews Section */}
+              <div className="mt-8 bg-card rounded-xl border border-border p-5 shadow-soft space-y-5">
+                <h3 className="font-display text-lg font-semibold text-foreground">Reviews</h3>
+                <ReviewList sellerId={listing.user_id} refreshKey={reviewRefresh} />
+                <div className="border-t border-border pt-4">
+                  <ReviewForm
+                    sellerId={listing.user_id}
+                    listingId={listing.id}
+                    onSubmitted={() => setReviewRefresh((r) => r + 1)}
+                  />
+                </div>
+              </div>
             </div>
 
             {/* Seller sidebar */}
