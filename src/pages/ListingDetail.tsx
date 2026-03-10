@@ -23,6 +23,7 @@ const ListingDetail = () => {
   const [seller, setSeller] = useState<any>(null);
   const [selectedPhoto, setSelectedPhoto] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [reviewRefresh, setReviewRefresh] = useState(0);
   const { isFavorite, toggleFavorite } = useFavorites();
 
   useEffect(() => {
