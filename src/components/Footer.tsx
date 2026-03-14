@@ -46,11 +46,11 @@ const Footer = () => {
         </div>
 
         <div className="pt-6 border-t border-primary-foreground/10 text-center">
-          <p className="text-primary-foreground/40 text-sm">© 2026 BirdMarket. All rights reserved.</p>
+          <p className="text-primary-foreground/40 text-sm">© 2026 BirdBazaar. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>);
-
 };
 
 export default Footer;
